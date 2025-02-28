@@ -5,11 +5,13 @@ import "../styles.css";
 const ProductList = () => {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/api/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
-  }, []);
+useEffect(() => {
+  fetch("https://ecommerce-backend.onrender.com/api/products")
+    .then((response) => response.json())
+    .then((data) => setProducts(data))
+    .catch((error) => console.error("Error fetching products:", error));
+}, []);
+
 
   const addToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
