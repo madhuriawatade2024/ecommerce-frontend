@@ -21,11 +21,13 @@ const Cart = () => {
       return;
     }
 
-    fetch("http://localhost:5000/api/order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...userInfo, cart }),
-    })
+ 
+   fetch("https://ecommerce-backend.onrender.com/api/orders", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(orderData),
+})
+
       .then((res) => res.json())
       .then((data) => {
         alert(data.message);
