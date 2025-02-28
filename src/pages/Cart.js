@@ -54,7 +54,7 @@ const Cart = () => {
         cart.map((item, index) => (
           <div key={index} className="cart-item">
             <img
-              src={`https://ecommerce-backend.onrender.com${item.image}`} // ✅ Use deployed backend URL
+              src={`https://ecommerce-backend.onrender.com${item.image}`}
               alt={item.name}
               width="50"
             />

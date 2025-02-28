@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
 
-
 const ProductList = () => {
   const [products, setProducts] = useState([]);
 
-useEffect(() => {
-  fetch("https://ecommerce-backend.onrender.com/api/products")
-    .then((response) => response.json())
-    .then((data) => setProducts(data))
-    .catch((error) => console.error("Error fetching products:", error));
-}, []);
-
+  useEffect(() => {
+    fetch("https://ecommerce-backend.onrender.com/api/products")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => setProducts(data))
+      .catch((error) => console.error("Error fetching products:", error.message));
+  }, []);
 
   const addToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -26,7 +29,7 @@ useEffect(() => {
       <div className="product-grid">
         {products.map((product) => (
           <div className="product-card" key={product.id}>
-            <img src={`http://localhost:5000${product.image}`} alt={product.name} />
+            <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p><strong>${product.price}</strong></p>
